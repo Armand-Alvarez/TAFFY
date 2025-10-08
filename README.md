@@ -10,3 +10,9 @@ Ask a question in the terminal, get quick answers from reliable sites, without a
       a) Wikipedia
    3. output results
    4. Summarize ? results
+
+## Extra Features
+
+### Wikipedia
+
+1. Multi-language support
