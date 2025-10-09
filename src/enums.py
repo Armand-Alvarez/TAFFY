@@ -10,5 +10,5 @@ API_VERSIONS = {
 }
 
 BASE_URLS = {
-    Sources.WIKIPEDIA: f"https://en.wikipedia.org/w/rest.php/{API_VERSIONS[Sources.WIKIPEDIA]}/",
+    Sources.WIKIPEDIA: f"https://en.wikipedia.org/w/rest.php/v{API_VERSIONS[Sources.WIKIPEDIA]}/",
 }
