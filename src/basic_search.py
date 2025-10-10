@@ -1,6 +1,6 @@
 import requests
-import json
 from enums import BASE_URLS, Sources
+import json
 
 
 search_query = 'solar system'
@@ -14,9 +14,6 @@ headers = {'User-Agent': 'TAFFY Searching Tool/0.1 (none)'}
 url = base_wiki_url + endpoint
 response = requests.get(url, headers=headers, params={'q': search_query, 'limit': number_of_results})
 response = json.loads(response.text)
-print(f"----\n{response}\n----")
-
-#for page in response['pages']:
-#  print(page['title'])
-#  print('https://en.wikipedia.org/wiki/' + page['key'])
-#  print()
+pages = response["pages"]
+for page in pages:
+    print(page["title"])
