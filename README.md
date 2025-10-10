@@ -13,6 +13,11 @@ Ask a question in the terminal, get quick answers from reliable sites, without a
 
 ## Extra Features
 
+### General
+
+1. Config file
+2. CLI setup
+
 ### Wikipedia
 
 1. Multi-language support
