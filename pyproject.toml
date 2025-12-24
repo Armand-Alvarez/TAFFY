@@ -4,4 +4,12 @@ version = "0.1.0"
 description = "Terminal Answer Finder For You"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "pip>=25.3",
+    "pytest>=9.0.2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
