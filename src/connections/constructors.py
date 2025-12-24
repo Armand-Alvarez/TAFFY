@@ -1,4 +1,4 @@
-from enums import BaseUrls
+from connections.enums import BaseUrls
 
 
 class WikipediaEndpoints:
