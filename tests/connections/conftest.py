@@ -5,9 +5,23 @@ from requests import RequestException
 
 
 @pytest.fixture
-def mock_endpoint():
+def mock_search_endpoint():
     with patch("connections.wikipedia.WikipediaEndpoints.search_pages") as mock:
         mock.return_value = "http://example.com/search"
+        yield mock
+
+
+@pytest.fixture
+def mock_get_page_endpoint():
+    with patch("connections.wikipedia.WikipediaEndpoints.get_page") as mock:
+        mock.return_value = "http://example.com/get_page"
+        yield mock
+
+
+@pytest.fixture
+def mock_get_page_with_html_endpoint():
+    with patch("connections.wikipedia.WikipediaEndpoints.get_page_with_html") as mock:
+        mock.return_value = "http://example.com/get_page_with_html"
         yield mock
 
 
@@ -23,7 +37,6 @@ def mock_get_404_status(mock_404_response):
     with patch("connections.wikipedia.requests.get") as mock:
         mock.return_value = mock_404_response
         yield mock
-
 
 
 @pytest.fixture
