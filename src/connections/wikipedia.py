@@ -2,6 +2,11 @@ import requests
 
 from connections.constructors import WikipediaEndpoints
 
+headers = {
+    "User-Agent": "TAFFY: Terminal Answer Finder For You! Project at (github.com/Armand-Alvarez/TAFFY)"
+}
+limit = 3
+
 
 def search_pages(query: str) -> dict:
     """
@@ -15,9 +20,9 @@ def search_pages(query: str) -> dict:
         ConnectionError: If non-200 status code or if get request fails.
     """
     query = str(query)
-    endpoint = WikipediaEndpoints().search_pages(query)
+    endpoint = WikipediaEndpoints().search_pages(query) + f"&limit={limit}"
     try:
-        resp = requests.get(endpoint)
+        resp = requests.get(endpoint, headers=headers)
     except requests.RequestException as e:
         raise ConnectionError(f"Failed to connect to Wikipedia API: {e}")
 
@@ -43,7 +48,7 @@ def get_page(query: str) -> dict:
     query = str(query)
     endpoint = WikipediaEndpoints().get_page(query)
     try:
-        resp = requests.get(endpoint)
+        resp = requests.get(endpoint, headers=headers)
     except requests.RequestException as e:
         raise ConnectionError(f"Failed to connect to Wikipedia API: {e}")
 
@@ -68,8 +73,11 @@ def get_page_with_html(query: str) -> dict:
     """
     query = str(query)
     endpoint = WikipediaEndpoints().get_page_with_html(query)
+    headers = {
+        "User-Agent": "TAFFY terminal search engine. Docs: github.com/Armand-Alvarez/TAFFY"
+    }
     try:
-        resp = requests.get(endpoint)
+        resp = requests.get(endpoint, headers=headers)
     except requests.RequestException as e:
         raise ConnectionError(f"Failed to connect to Wikipedia API: {e}")
     if resp.status_code == 200:
