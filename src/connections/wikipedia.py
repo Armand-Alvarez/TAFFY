@@ -15,7 +15,7 @@ def search_pages(query: str) -> dict:
         ConnectionError: If non-200 status code or if get request fails.
     """
     query = str(query)
-    endpoint = WikipediaEndpoints.search_pages(query)
+    endpoint = WikipediaEndpoints().search_pages(query)
     try:
         resp = requests.get(endpoint)
     except requests.RequestException as e:
@@ -41,7 +41,7 @@ def get_page(query: str) -> dict:
         ConnectionError: If non-200 status code or if get request fails.
     """
     query = str(query)
-    endpoint = WikipediaEndpoints.get_page(query)
+    endpoint = WikipediaEndpoints().get_page(query)
     try:
         resp = requests.get(endpoint)
     except requests.RequestException as e:
@@ -67,7 +67,7 @@ def get_page_with_html(query: str) -> dict:
         ConnectionError: If non-200 status code or if get request fails.
     """
     query = str(query)
-    endpoint = WikipediaEndpoints.get_page_with_html(query)
+    endpoint = WikipediaEndpoints().get_page_with_html(query)
     try:
         resp = requests.get(endpoint)
     except requests.RequestException as e:
