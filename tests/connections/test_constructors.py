@@ -9,8 +9,11 @@ class TestWikipediaEndpoints:
 
     def test_search_pages_returns_expected_endpoint(self):
         mock_query = "test"
-        result = self.wikipedia_endpoints.search_pages(mock_query)
-        expected_result = self.base_url + f"/search/page?q={mock_query}"
+        mock_limit = 1
+        result = self.wikipedia_endpoints.search_pages(mock_query, mock_limit)
+        expected_result = (
+            self.base_url + f"/search/page?q={mock_query}&limit={mock_limit}"
+        )
         assert result == expected_result
 
     def test_get_page_returns_expected_endpoint(self):

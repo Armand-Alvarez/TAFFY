@@ -1,6 +1,9 @@
 import pytest
 
-from connections.wikipedia import get_page, search_pages, get_page_with_html
+from connections.enums import Headers
+from connections.wikipedia import get_page, get_page_with_html, search_pages
+
+headers = Headers.WIKIPEDIA.value
 
 
 class TestSearchPages:
@@ -11,9 +14,14 @@ class TestSearchPages:
     ):
         result = search_pages("test")
 
+        expected_url = "http://example.com/search&limit=3"
+        expected_headers = headers
+
         assert result == {"query": "test", "results": []}
         mock_search_endpoint.assert_called_once_with("test")
-        mock_get_200_status.assert_called_once_with("http://example.com/search")
+        mock_get_200_status.assert_called_once_with(
+            expected_url, headers=expected_headers
+        )
 
     def test_non_200_status_code_raises_connection_error_with_string(
         self,
@@ -57,9 +65,14 @@ class TestGetPage:
     ):
         result = get_page("test")
 
+        expected_url = "http://example.com/get_page"
+        expected_headers = headers
+
         assert result == {"query": "test", "results": []}
         mock_get_page_endpoint.assert_called_once_with("test")
-        mock_get_200_status.assert_called_once_with("http://example.com/get_page")
+        mock_get_200_status.assert_called_once_with(
+            expected_url, headers=expected_headers
+        )
 
     def test_non_200_status_code_raises_connection_error_with_string(
         self,
@@ -103,10 +116,13 @@ class TestGetPageWithHTML:
     ):
         result = get_page_with_html("test")
 
+        expected_url = "http://example.com/get_page_with_html"
+        expected_headers = headers
+
         assert result == {"query": "test", "results": []}
         mock_get_page_with_html_endpoint.assert_called_once_with("test")
         mock_get_200_status.assert_called_once_with(
-            "http://example.com/get_page_with_html"
+            expected_url, headers=expected_headers
         )
 
     def test_non_200_status_code_raises_connection_error_with_string(
@@ -114,9 +130,7 @@ class TestGetPageWithHTML:
         mock_get_page_with_html_endpoint,
         mock_get_404_status,
     ):
-        expected_error_string = (
-            "get_page_with_html endpoint did not return 200. Code: 404\nerror: Not found"
-        )
+        expected_error_string = "get_page_with_html endpoint did not return 200. Code: 404\nerror: Not found"
 
         with pytest.raises(
             ConnectionError,
