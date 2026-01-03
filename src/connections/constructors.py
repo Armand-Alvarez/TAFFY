@@ -5,18 +5,19 @@ class WikipediaEndpoints:
     def __init__(self):
         self.base = BaseUrls.WIKIPEDIA.value
 
-    def search_pages(self, query: str) -> str:
+    def search_pages(self, query: str, limit) -> str:
         """
         Construct endpoint for wikipedia search_pages endpoint
 
         Args:
                 query (str): The query to search
+                limit (int): The limit of results
 
         Returns:
         str: The constructed endpoint
         """
 
-        endpoint = f"/search/page?q={query}"
+        endpoint = f"/search/page?q={query}&limit={str(limit)}"
 
         return self.base + endpoint
 

@@ -1,11 +1,10 @@
 import requests
 
 from connections.constructors import WikipediaEndpoints
+from connections.enums import Headers, Limits
 
-headers = {
-    "User-Agent": "TAFFY: Terminal Answer Finder For You! Project at (github.com/Armand-Alvarez/TAFFY)"
-}
-limit = 3
+headers = Headers.WIKIPEDIA.value
+limit = Limits.WIKIPEDIA.value
 
 
 def search_pages(query: str) -> dict:
@@ -73,9 +72,6 @@ def get_page_with_html(query: str) -> dict:
     """
     query = str(query)
     endpoint = WikipediaEndpoints().get_page_with_html(query)
-    headers = {
-        "User-Agent": "TAFFY terminal search engine. Docs: github.com/Armand-Alvarez/TAFFY"
-    }
     try:
         resp = requests.get(endpoint, headers=headers)
     except requests.RequestException as e:
