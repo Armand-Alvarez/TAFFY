@@ -3,7 +3,6 @@ from typing import Annotated
 import typer
 from rich import print
 
-from connections.wikipedia import get_page, get_page_with_html, search_pages
 from enums import WikipediaQueryTypes
 
 app = typer.Typer()
@@ -27,22 +26,15 @@ def wikipedia(
             get_page_with_html (default) = Get an article
     """
     if type == WikipediaQueryTypes.SEARCH_PAGES:
-        fn = search_pages
+        print("search pages")
+        # fn = search_pages
     elif type == WikipediaQueryTypes.GET_PAGE:
-        fn = get_page
+        # fn = get_page
+        print("get page")
     else:
-        fn = get_page_with_html
+        # fn = get_page_with_html
+        print("get page with html")
 
-    try:
-        resp = fn(query)
-    except ConnectionError as e:
-        print(f"[bold red]❗Connection Error:[/bold red] {e}")
-        raise typer.Exit(1)
-    except Exception as e:
-        print(f"[bold red]❗Unknown Error:[/bold red] {e}")
-        raise typer.Exit(1)
-
-    print(resp)
 
 
 if __name__ == "__main__":
